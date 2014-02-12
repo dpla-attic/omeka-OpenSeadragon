@@ -7,6 +7,9 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
+
+require_once dirname(__FILE__) . '/helpers/OpenSeadragonFunctions.php';
+
 /**
  * The OpenSeadragon plugin.
  * 
