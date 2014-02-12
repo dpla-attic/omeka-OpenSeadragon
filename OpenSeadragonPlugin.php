@@ -7,6 +7,9 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
+
+require_once dirname(__FILE__) . '/helpers/OpenSeadragonFunctions.php';
+
 /**
  * The OpenSeadragon plugin.
  * 
@@ -152,6 +155,12 @@ class OpenSeadragonPlugin extends Omeka_Plugin_AbstractPlugin
      */
     private function _head()
     {
-        queue_js_file('openseadragon.min', 'openseadragon'); 
+        queue_js_file('openseadragon', 'openseadragon');
+        queue_js_file('settings', 'openseadragon');
+    }
+
+    public function openseadragon_pyramid($image, $size)
+    {
+        return openseadragon_create_pyramid($image, $size);
     }
 }
