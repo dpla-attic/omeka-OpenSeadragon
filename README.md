@@ -1,4 +1,4 @@
-OpenSeadragon plugin for Omeka
+OpenSeadragon plugin for Omeka 0.1
 ===
 
 This is a plugin for Omeka that adds an [OpenSeadragon](http://openseadragon.github.io)
