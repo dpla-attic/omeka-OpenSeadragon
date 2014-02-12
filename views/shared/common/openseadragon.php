@@ -4,8 +4,9 @@ $btn_path = src('images/', 'openseadragon');
 //$cache_param = html_escape(Zend_Registry::get('bootstrap')->getResource('Config')->dpla->openseadragon->update_cache_param);
 ?>
 
-<div class="openseadragon" data-api-url="<?=$btn_path?>"> <!-- FIXME -->
-    <div class="openseadragon_viewer" id="<?=$unique_id?>">
+<div class="openseadragon">
+    <div class="openseadragon_viewer" id="<?=$unique_id?>"
+        data-api-url="<?=$btn_path?>home_pressed.png"> <!-- FIXME -->
         <?php foreach($images as $image): 
            $metadata = json_decode($image->metadata, true)?>
             <img src="<?php echo html_escape($image->getWebPath('original')); ?>"
@@ -38,7 +39,8 @@ $btn_path = src('images/', 'openseadragon');
         showNavigationControl:   true, 
         navigationControlAnchor: OpenSeadragon.ControlAnchor.BOTTOM_RIGHT,
         minZoomImageRatio: 0.8,
-        maxZoomPixelRatio: 2
+        maxZoomPixelRatio: 2,
+        autoHideControls: false
     });
     // </script>
 </div>

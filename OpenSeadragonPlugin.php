@@ -152,6 +152,6 @@ class OpenSeadragonPlugin extends Omeka_Plugin_AbstractPlugin
      */
     private function _head()
     {
-        queue_js_file('openseadragon.min', 'openseadragon'); 
+        queue_js_file('openseadragon', 'openseadragon');
     }
 }
