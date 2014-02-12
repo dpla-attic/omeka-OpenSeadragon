@@ -13,3 +13,4 @@ the fork used in the [DPLA Exhibitions](https://github.com/dpla/exhibitions) cod
 
 * Does not work with TIFF images.
 * Relies on a bogus XHR (legacy of the ZoomIt plugin on which it's based)
+* Requires php-GD module
