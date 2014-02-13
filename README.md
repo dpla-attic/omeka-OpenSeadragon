@@ -12,7 +12,7 @@ for Omeka, and the fork of that plugin used in the
 **Requirements**
 
 * Omeka 2.0 or higher
-* The `gd` (recommend) and/or the `exif` modules for PHP
+* The `gd` (recommended) and/or the `exif` modules for PHP
 
 **How it works**
 
