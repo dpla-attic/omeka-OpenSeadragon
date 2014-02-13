@@ -10,11 +10,11 @@
 /**
  * @package OpenSeadragon\View\Helper
  */
-class OpenSeadragon_View_Helper_OpenSeadragon extends Zend_View_Helper_Abstract
+class OpenSeadragon_View_Helper_Openseadragon extends Zend_View_Helper_Abstract
 {
     protected $_supportedExtensions = array('bmp', 'gif', 'ico', 'jpeg', 'jpg', 
                                             'png', 'tiff', 'tif');
-    
+
     /**
      * Return a OpenSeadragon image viewer for the provided files.
      * 
@@ -23,12 +23,12 @@ class OpenSeadragon_View_Helper_OpenSeadragon extends Zend_View_Helper_Abstract
      * @param int $height The height of the image viewer in pixels.
      * @return string|null
      */
-    public function openseadragon($files, $width = 500, $height = 600)
+    public function openseadragon($files)
     {
         if (!is_array($files)) {
             $files = array($files);
         }
-        
+
         // Filter out invalid images.
         $images = array();
         foreach ($files as $file) {
@@ -43,14 +43,14 @@ class OpenSeadragon_View_Helper_OpenSeadragon extends Zend_View_Helper_Abstract
             }
             $images[] = $file;
         }
-        
+
         // Return if there are no valid images.
         if (!$images) {
             return;
         }
-        
+
         return $this->view->partial('common/openseadragon.php', array(
-            'images' => $images, 'width' => $width, 'height' => $height
+            'images' => $images
         ));
     }
 }

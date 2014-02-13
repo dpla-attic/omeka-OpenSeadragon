@@ -1,4 +1,4 @@
-<?php
+<?php true;
 $button_path = src('images/', 'openseadragon');
 //$cache_param = html_escape(Zend_Registry::get('bootstrap')->getResource('Config')->dpla->openseadragon->update_cache_param);
 ?>

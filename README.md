@@ -1,7 +1,7 @@
-OpenSeadragon plugin for Omeka 0.1
+OpenSeadragon plugin for Omeka
 ===
 
-This is a plugin for Omeka that adds an [OpenSeadragon](http://openseadragon.github.io)
+This is a plugin for Omeka 2.x that adds an [OpenSeadragon](http://openseadragon.github.io)
 zoomable image viewer, usable on item pages and exhibits. It uses OpenSeadragon's
 support for ["legacy image pyramids"](http://openseadragon.github.io/examples/tilesource-legacy/)
 to pull in original, fullsize, and thumbnail images from Omeka.
@@ -14,3 +14,7 @@ the fork used in the [DPLA Exhibitions](https://github.com/dpla/exhibitions) cod
 * Does not work with TIFF images.
 * Relies on a bogus XHR (legacy of the ZoomIt plugin on which it's based)
 * Requires php-GD module
+
+**Links:**
+
+* [Release History](https://github.com/dpla/omeka-OpenSeadragon/wiki/Release-History)
