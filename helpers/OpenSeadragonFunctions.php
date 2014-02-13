@@ -27,20 +27,26 @@ function openseadragon_pyramid_level($image, $size='original')
 
 function openseadragon_dimensions($image, $size='original')
 {
-    // First, fetch the metadata for the original, just because it might be relevant
-    $stored_md = json_decode($image->metadata, true);
 
-    // If we're getting the level hash for the original, trust the stored ID3 data
+    // If we're getting the level hash for original, trust stored ID3 data
+    // $stored_md = json_decode($image->metadata, true);
     if (($size == 'original') && ($md = _dimensions_from_id3($stored_md))) {
         return $md;
     }
 
-    // If it's not an original, or there was no stored ID3 data
-    if ($md = _dimensions_from_id3(_osd_getId3($image, $size))) {
+    // If it's not an original, or there was no stored ID3 data, try using
+    // gd's getimagesize() function
+    if ($md = _dimensions_from_gd($image, $size)) {
         return $md;
     }
 
-    // If all else fails and it's not an original, bodge together the dimensions
+    // If that didn't work, try exif_read_data(), which only works on
+    // JPEGs and TIFFs
+    if ($md = _dimensions_from_exif($image, $size)) {
+        return $md;
+    }
+
+    // If all else fails and it's not an original, bodge together dimensions
     // from the size constraints. NOTE:: this has an adverse impact on aspect
     // ratio.
     if ($size != 'original') {
@@ -49,10 +55,16 @@ function openseadragon_dimensions($image, $size='original')
             'height' => (int) get_option($size.'_constraint')
         );
     }
-    // If all else fails, just throw back null, because we don't know what to do
+
+    // If all else fails, just return null, because we don't know what to do
     else {
         return array('width' => null, 'height' => null);
     }
+}
+
+function _get_full_path($image, $size='original')
+{
+    return FILES_DIR.'/'.$image->getStoragePath($size);
 }
 
 function _dimensions_from_id3($source)
@@ -70,28 +82,38 @@ function _dimensions_from_id3($source)
     }
 }
 
-function _osd_getId3($image, $size='original')
+function _dimensions_from_gd($image, $size='original')
 {
-    require_once 'getid3/getid3.php';
-    $id3 = new getID3;
-    $id3->encoding = 'UTF-8';
     try {
-        $id3->Analyze(FILES_DIR.'/'.$image->getStoragePath($size));
-        getid3_lib::CopyTagsToComments($id3->info);
-        $metadata = array();
-        $keys = array(
-            'mime_type', 'audio', 'video', 'comments', 'comments_html',
-            'iptc', 'jpg'
-        );
-        foreach($keys as $key) {
-            if (array_key_exists($key, $id3->info)) {
-                $metadata[$key] = $id3->info[$key];
-            }
-        }
-        return $metadata;
-    } catch (getid3_exception $e) {
+        $fn = _get_full_path($image, $size);
+        list($width, $height, $type, $attrs) = getimagesize($fn);
+        return array('width' => $width, 'height' => $height);
+    } catch (Exception $e) {
         $message = $e->getMessage();
-        _log("getID3: $message");
+        _log("Getting dimensions using getimagesize failed: $message");
         return false;
     }
 }
+
+function _dimensions_from_exif($image, $size='original')
+{
+    try {
+        $fn = _get_full_path($image, $size);
+        $d = new Omeka_File_MimeType_Detect($fn);
+        if (array_search($d->detect(), array('image/tiff', 'image/jpeg'))) {
+            $exif_md = exif_read_data($fn, 'COMPUTED');
+            return array(
+                'width' => $exif_md['COMPUTED']['Width'],
+                'height' => $exif_md['COMPUTED']['Height']
+            );
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        $message = $e->getMessage();
+        _log("Getting dimensions using exif_read_data failed: $message");
+        return false;
+    }
+}
+
+?>
