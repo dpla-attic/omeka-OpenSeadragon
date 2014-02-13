@@ -38,6 +38,15 @@
     </div>
 </div>
 <div class="field">
+    <div id="openseadragon_css_override_public_label" class="two columns alpha">
+        <label for="openseadragon_css_override_public"><?php echo __('Override width/height in public item show pages using custom CSS?'); ?></label>
+    </div>
+    <div class="inputs five columns omega">
+        <?php echo $this->formCheckbox('openseadragon_css_override_public', null, 
+        array('checked' => (bool) get_option('openseadragon_css_override_public'))); ?>
+    </div>
+</div>
+<div class="field">
     <div id="openseadragon_width_public_label" class="two columns alpha">
         <label for="openseadragon_width_public"><?php echo __('Viewer width, in pixels'); ?></label>
     </div>
