@@ -1,8 +1,4 @@
-<?php true;
-$button_path = src('images/', 'openseadragon');
-//$cache_param = html_escape(Zend_Registry::get('bootstrap')->getResource('Config')->dpla->openseadragon->update_cache_param);
-?>
-
+<?php $button_path = src('images/', 'openseadragon');?>
 <div class="openseadragon">
     <?php
     foreach($images as $image):
@@ -18,17 +14,13 @@ $button_path = src('images/', 'openseadragon');
     </div>
 
     <script type="text/javascript">
-        osdSettings(); // defined in shared/openseadragon/settings.js
-        // the following needs to be set dynamically
-        OpenSeadragon.DEFAULT_SETTINGS.prefixUrl = '<?=$button_path?>';
-        var viewer = OpenSeadragon("<?=$unique_id?>");
-
-        // TODO: Add logic that checks the file type of original; if it's a
-        // TIFF,  fail gracefully by not including the original in the image
-        // pyramid or generate a new JPEG
-        var ts = new OpenSeadragon.LegacyTileSource(
-            <?php echo openseadragon_create_pyramid($image); ?>
-        );
+        var config = osdSettings({ // shared/openseadragon/settings.js
+            _id: "<?=$unique_id?>",
+            prefixUrl: "<?=$button_path?>"
+        });
+        var viewer = OpenSeadragon(config);
+        var ts = new OpenSeadragon.LegacyTileSource(<?php
+            echo openseadragon_create_pyramid($image); ?>);
         viewer.openTileSource(ts);
     </script>
     <?php endforeach; ?>
