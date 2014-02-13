@@ -1,0 +1,26 @@
+.openseadragon h2,.openseadragon p,.openseadragon ul,.openseadragon_viewer h2 {
+	display: none;
+}
+
+.openseadragon_images {
+	display: none;
+}
+
+.openseadragon_viewer {
+	width: 100%;
+	height: 100%;
+	clear: both;
+	background: #000;
+}
+
+.openseadragon_viewer .tmp-img {
+	display: none;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+}
+
+.openseadragon-container textarea, .openseadragon-container button {
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
