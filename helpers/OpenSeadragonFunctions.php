@@ -29,7 +29,7 @@ function openseadragon_dimensions($image, $size='original')
 {
 
     // If we're getting the level hash for original, trust stored ID3 data
-    // $stored_md = json_decode($image->metadata, true);
+    $stored_md = json_decode($image->metadata, true);
     if (($size == 'original') && ($md = _dimensions_from_id3($stored_md))) {
         return $md;
     }
