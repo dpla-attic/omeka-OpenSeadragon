@@ -38,6 +38,14 @@ If you want to load high resolution versions of these, you'll need to convert
 them to a supported format or only rely on the `fullsize` and `thumbnail`
 sizes.
 
+**Installation**
+
+* Transfer the Omeka OpenSeadragon zip file to your `/plugins` directory. 
+* Extract the contents of the zip file. 
+* Change the directory name from `omeka-OpenSeadragon-master` to `OpenSeadragon`.
+* Log in to Omeka and visit the **Plugins** section.
+* Enable OpenSeadragon and click **Configure** to enable the OpenSeadragon viewer on Admin and Public 'item show' pages.
+
 **Links:**
 
 * [Release History](https://github.com/dpla/omeka-OpenSeadragon/wiki/Release-History)
