@@ -23,7 +23,7 @@ class OpenSeadragon_View_Helper_Openseadragon extends Zend_View_Helper_Abstract
      * @param int $height The height of the image viewer in pixels.
      * @return string|null
      */
-    public function openseadragon($files)
+    public function openseadragon($files, $options = false)
     {
         if (!is_array($files)) {
             $files = array($files);
@@ -49,8 +49,13 @@ class OpenSeadragon_View_Helper_Openseadragon extends Zend_View_Helper_Abstract
             return;
         }
 
+        if ($options === false) {
+            $options = [];
+        }
+
         return $this->view->partial('common/openseadragon.php', array(
-            'images' => $images
+            'images' => $images,
+            'options' => $options
         ));
     }
 }

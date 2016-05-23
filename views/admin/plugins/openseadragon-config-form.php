@@ -10,6 +10,15 @@
     </div>
 </div>
 <div class="field">
+    <div id="openseadragon_show_rotate_admin_label" class="two columns alpha">
+        <label for="openseadragon_show_rotate_admin"><?php echo __('Show rotate controls?'); ?></label>
+    </div>
+    <div class="inputs five columns omega">
+        <?php echo $this->formCheckbox('openseadragon_show_rotate_admin', null,
+        array('checked' => (bool) get_option('openseadragon_show_rotate_admin'))); ?>
+    </div>
+</div>
+<div class="field">
     <div id="openseadragon_width_admin_label" class="two columns alpha">
         <label for="openseadragon_width_admin"><?php echo __('Viewer width, in pixels'); ?></label>
     </div>
@@ -46,6 +55,17 @@
         array('checked' => (bool) get_option('openseadragon_css_override_public'))); ?>
     </div>
 </div>
+
+<div class="field">
+    <div id="openseadragon_show_rotate_public_label" class="two columns alpha">
+        <label for="openseadragon_show_rotate_public"><?php echo __('Show rotate controls?'); ?></label>
+    </div>
+    <div class="inputs five columns omega">
+        <?php echo $this->formCheckbox('openseadragon_show_rotate_public', null,
+            array('checked' => (bool) get_option('openseadragon_show_rotate_public'))); ?>
+    </div>
+</div>
+
 <div class="field">
     <div id="openseadragon_width_public_label" class="two columns alpha">
         <label for="openseadragon_width_public"><?php echo __('Viewer width, in pixels'); ?></label>

@@ -16,5 +16,6 @@ function osdSettings(cfg) {
         constrainDuringPan: true,
         springStiffness: 5,
         visibilityRatio: 0.8,
+
     }
 }

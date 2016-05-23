@@ -102,16 +102,22 @@ class OpenSeadragonPlugin extends Omeka_Plugin_AbstractPlugin
         if (!is_numeric($_POST['openseadragon_width_admin']) || 
             !is_numeric($_POST['openseadragon_height_admin']) || 
             !is_numeric($_POST['openseadragon_width_public']) || 
+            !is_numeric($_POST['openseadragon_show_rotate_admin']) ||
+            !is_numeric($_POST['openseadragon_show_rotate_public']) ||
             !is_numeric($_POST['openseadragon_height_public'])) {
             throw new Omeka_Validate_Exception('The width and height must be numeric.');
         }
         set_option('openseadragon_embed_admin', (int) (boolean) $_POST['openseadragon_embed_admin']);
         set_option('openseadragon_width_admin', $_POST['openseadragon_width_admin']);
         set_option('openseadragon_height_admin', $_POST['openseadragon_height_admin']);
+        set_option('openseadragon_show_rotate_admin', $_POST['openseadragon_show_rotate_admin']);
+
+
         set_option('openseadragon_embed_public', (int) (boolean) $_POST['openseadragon_embed_public']);
         set_option('openseadragon_css_override_public', (int) (boolean) $_POST['openseadragon_css_override_public']);
         set_option('openseadragon_width_public', $_POST['openseadragon_width_public']);
         set_option('openseadragon_height_public', $_POST['openseadragon_height_public']);
+        set_option('openseadragon_show_rotate_public', $_POST['openseadragon_show_rotate_public']);
     }
     
     /**
@@ -123,7 +129,9 @@ class OpenSeadragonPlugin extends Omeka_Plugin_AbstractPlugin
         if (!get_option('openseadragon_embed_admin')) {
             return;
         }
-        echo $args['view']->openseadragon($args['item']->Files);
+        echo $args['view']->openseadragon($args['item']->Files, [
+            'showRotate' => get_option('openseadragon_show_rotate_admin'),
+        ]);
     }
     
     /**
@@ -135,7 +143,9 @@ class OpenSeadragonPlugin extends Omeka_Plugin_AbstractPlugin
         if (!get_option('openseadragon_embed_public')) {
             return;
         }
-        echo $args['view']->openseadragon($args['item']->Files);
+        echo $args['view']->openseadragon($args['item']->Files, [
+            'showRotate' => get_option('openseadragon_show_rotate_public'),
+        ]);
     }
 
     private function _osd_css($width, $height)

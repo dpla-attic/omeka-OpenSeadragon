@@ -10,14 +10,20 @@
     </div>
 
     <script type="text/javascript">
-        var config = osdSettings({ // shared/openseadragon/settings.js
-            _id: "<?=$unique_id?>",
+        var config = { // shared/openseadragon/settings.js
+            <?php if (isset($options['showRotate']) && $options['showRotate']): ?>
+            showRotationControl: true,
+            gestureSettingsTouch: {
+                pinchRotate: true
+            },
+            <?php endif; ?>
+            id: "<?=$unique_id?>",
             prefixUrl: "<?=$button_path?>"
-        });
+        };
         var viewer = OpenSeadragon(config);
         var ts = new OpenSeadragon.LegacyTileSource(<?php
             echo openseadragon_create_pyramid($image); ?>);
-        viewer.openTileSource(ts);
+        viewer.open(ts);
     </script>
     <?php endforeach; ?>
 </div>
